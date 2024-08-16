@@ -1,20 +1,24 @@
 <% matching_result = Game.order(final_score: :desc) %>
 
-<table border="1">
+<table class="table">
   <thead>
     <tr>
-      <th>Index No.</th>
+      <th>#</th>
       <th>User Name</th>
       <th>Score</th>
       <th>Game Id</th>
       <th>Date</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-group-divider">
     <% matching_result.each_with_index do |game, index| %>
       <tr>
         <td><%= index + 1 %></td>
-        <td><%= game.user_id %></td>
+        <td>
+          <% matching_records = User.where(id: game.user_id) %>
+          <% user = matching_records.first %>
+          <%= user.email.split('@').first %>
+        </td>
         <td><%= game.final_score %></td>
         <td><%= game.game_id %></td>
         <td><%= game.created_at.strftime("%B %d, %Y") %></td>

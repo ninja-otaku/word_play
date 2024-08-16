@@ -21,7 +21,7 @@
       <!-- Hidden fields to pass data -->
       <input type="hidden" name="question<%=i%>_id" value="<%= x.id %>">
       <input type="hidden" name="question<%=i%>_correct_answer" value="<%= x.equals_word %>">
-      <%= x.equals_word %>
+      <% x.equals_word %>
       <br>
     <%end%>
     <input type="hidden" name="game_id" value="<%=@game_id%>">

@@ -1,0 +1,31 @@
+<%= params.inspect %>
+<!--<% (1..10).each do |i| %>
+  <%= instance_variable_get("@the_game_question#{i}") %>
+<% end %> -->
+<form action="/results_form" method="post">
+  <%(1..10).each do |i| %>
+    <div> Question # <%=i%> is </div>
+    <% x = instance_variable_get("@the_game_question#{i}") %>
+    <div>
+    <br>
+    <%= x.base_word %> - <%= x.subtract_word %> + <%= x.add_word %> = _______?
+    </div>
+    <br>
+    <div>
+    <label for="answer<%=i%>">
+    Enter your answer: </label>
+    <input type="text" id="answer<%=i%>" name="answer<%=i%>">
+    </div>
+    <br>
+    <!-- Hidden fields to pass data -->
+    <input type="hidden" name="question<%=i%>_id" value="<%= x.id %>">
+    <input type="hidden" name="question<%=i%>_correct_answer" value="<%= x.equals_word %>">
+    <%= x.equals_word %>
+    <br>
+  <%end%>
+  <input type="hidden" name="game_id" value="<%=@game_id%>">
+  <input type="hidden" name="user_id" value="<%=current_user.id%>">
+  <button>Submit</button>
+</form>
+
+<%@path_id%>

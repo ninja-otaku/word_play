@@ -10,5 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_16_032649) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "game_questions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.integer "final_score"
+    t.string "user_response"
+    t.integer "score"
+    t.integer "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "correct_response"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "final_score"
+    t.integer "game_questions_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "question_banks", force: :cascade do |t|
+    t.string "difficulty_level"
+    t.string "category"
+    t.string "base_word"
+    t.string "add_word"
+    t.string "subtract_word"
+    t.string "equals_word"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "player_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
 end

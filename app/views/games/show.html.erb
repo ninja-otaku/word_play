@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Game #<%= @the_game.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/games">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_game/<%= @the_game.id %>">
+          Delete game
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_game.user_id %>
+      </dd>
+
+      <dt>
+        Final score
+      </dt>
+      <dd>
+        <%= @the_game.final_score %>
+      </dd>
+
+      <dt>
+        Game questions count
+      </dt>
+      <dd>
+        <%= @the_game.game_questions_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_game.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_game.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit game
+    </h2>
+
+    <form action="/modify_game/<%= @the_game.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_game.user_id %>">
+      </div>
+
+      <div>
+        <label for="final_score_box">
+          Final score
+        </label>
+
+        <input type="text" id="final_score_box" name="query_final_score" value="<%= @the_game.final_score %>">
+      </div>
+
+      <div>
+        <label for="game_questions_count_box">
+          Game questions count
+        </label>
+
+        <input type="text" id="game_questions_count_box" name="query_game_questions_count" value="<%= @the_game.game_questions_count %>">
+      </div>
+
+      <button>
+        Update game
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

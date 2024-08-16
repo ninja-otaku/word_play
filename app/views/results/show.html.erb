@@ -26,7 +26,8 @@
   <% result.final_score = total_score %>
   <% result.save %>
 <% end %>
-
+<div><a href = "/"> Home Page </a></div>
+<div><a href = "/game_questions/<%= Time.now.to_i %><%= rand(10000) %>"> Play Again </a></div>
 <!--
 <div>
   <% matching_records = GameQuestion.where({:user_response => "ads"}) %>

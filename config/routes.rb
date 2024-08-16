@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get("/delete_game/:path_id", { :controller => "games", :action => "destroy" })
 
   #------------------------------
-  get("/high_scores",{:controller=>"games_questions",:action=>"score"})
+
   # Routes for the Game question resource:
 
   # CREATE
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get("/game_questions", { :controller => "game_questions", :action => "index" })
   
   get("/game_questions/:path_id", { :controller => "game_questions", :action => "show" })
-  
+  get("/high_scores",{:controller=>"game_questions",:action=>"score"})
   post("/results_form",{:controller=>"game_questions",:action=>"results"})
   #get("/results",{:controller=>"game_questions",:action=>"results_display"})
   get("/results/:path_id",{:controller=>"game_questions",:action=>"results_display"})

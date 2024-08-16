@@ -1,4 +1,4 @@
-class GamesController < ApplicationController
+routclass GamesController < ApplicationController
   def index
     matching_games = Game.all
 

@@ -122,6 +122,7 @@ class GameQuestionsController < ApplicationController
   end
 
   def score
+    
     render({ :template => "results/index" })
   end
 end

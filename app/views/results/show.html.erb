@@ -6,17 +6,6 @@
   <% records_count = matching_records.count %>
 </div>
 -->
-
-<% matching_records = GameQuestion.where({ :game_id => @the_id }) %>
-<% total_score = matching_records.sum(:score) %>
-<% records_count = matching_records.count %>
-
-<div class="score-box">
-    <h2>Congratulations!</h2>
-    <p>Your score is <%= total_score %> out of <%= records_count %></p>
-</div>
-<!-- <%= records_count %> records found -->
-
 <% matching_result = Game.where({ :game_id => @the_id }).first %>
 <% if matching_result.nil? %>
   <% result = Game.new %>
@@ -25,22 +14,48 @@
   <% result.final_score = total_score %>
   <% result.save %>
 <% end %>
+<% matching_records = GameQuestion.where({ :game_id => @the_id }) %>
+<% total_score = matching_records.sum(:score) %>
+<% records_count = matching_records.count %>
+<% matching_result = Game.where({ :game_id => @the_id }).first %>
+
+<% if current_user && current_user.id == matching_result.user_id %>
+  <% if !@came_from_high_scores %>
+    <div class="score-box">
+      <h2>Congratulations!</h2>
+      <p>Your score is <%= total_score %> out of <%= records_count %></p>
+    </div>
+  <% end %>
+<% end %>
+<!-- <%= records_count %> records found -->
 
 <% if matching_records.any? %>
-   <% matching_records.each do |record| %>
-   <% question = QuestionBank.where({ :id => record.question_id }).first %>
-   <% if question %> 
-       <div class="question-box">
+  <% matching_records.each do |record| %>
+    <% question = QuestionBank.where({ :id => record.question_id }).first %>
+    <% if question %> 
+      <div class="question-box">
         <p><strong>Question:</strong> <%= question.base_word %> + <%= question.add_word %> - <%= question.subtract_word %> = <%= question.equals_word %></p>
-       <p><strong>Response:</strong> <%= record.user_response %></p>
-       </div>
+        <p>
+          <strong>
+            <% if current_user && current_user.id == matching_result.user_id %>
+              Your
+            <% else %>
+              <% matching_user = User.where({ :id => matching_result.user_id }).first %>
+              <%= matching_user.email.split('@').first.capitalize %>'s
+            <% end %>
+            Response:
+          </strong> <%= record.user_response %>
+        </p>
+      </div>
     <% end %>
   <% end %>
 <% end %>
 
 <div class="links">
   <a href="/">Home Page</a>
-  <a href="/game_questions/<%= Time.now.to_i %><%= rand(10000) %>">Play Again</a>
+  <% if current_user %>
+    <a href="/game_questions/<%= Time.now.to_i %><%= rand(10000) %>">Play Again</a>
+  <% end %>
 </div>
 <!--
 <div>

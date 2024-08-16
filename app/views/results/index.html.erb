@@ -6,7 +6,7 @@
       <th>#</th>
       <th>User Name</th>
       <th>Score</th>
-      <th>Game Id</th>
+      <th>Game Link</th>
       <th>Date</th>
     </tr>
   </thead>
@@ -17,10 +17,10 @@
         <td>
           <% matching_records = User.where(id: game.user_id) %>
           <% user = matching_records.first %>
-          <%= user.email.split('@').first %>
+          <%= user.email.split('@').first.capitalize %>
         </td>
         <td><%= game.final_score %></td>
-        <td><%= game.game_id %></td>
+        <td><a href = "/results/<%= game.game_id %>">Link to game</a></td>
         <td><%= game.created_at.strftime("%B %d, %Y") %></td>
       </tr>
     <% end %>

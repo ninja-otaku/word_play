@@ -1,20 +1,22 @@
 
 
 
-<%= params.inspect %>
+<!-- <%= params.inspect %> -->
 
+<!--
 <div>
   <% matching_records = GameQuestion.where({:game_id => @the_id}) %>
   <% total_score = matching_records.sum(:score) %>
   <%= total_score %>
   <% records_count = matching_records.count %>
 </div>
+-->
 
 <div>
-  Your score is <%= total_score %> out of <%= records_count %>
+  Congratulations! Your score is <%= total_score %> out of <%= records_count %>
 </div>
 
-<%= records_count %> records found
+<!-- <%= records_count %> records found -->
 
 <% matching_result = Game.find_by(game_id: @the_id) %>
 <% if matching_result.nil? %>
@@ -25,8 +27,10 @@
   <% result.save %>
 <% end %>
 
+<!--
 <div>
   <% matching_records = GameQuestion.where({:user_response => "ads"}) %>
   <% records_count = matching_records.count %>
   <%= records_count %> records found
 </div>
+-->

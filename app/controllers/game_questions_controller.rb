@@ -120,4 +120,8 @@ class GameQuestionsController < ApplicationController
 
     redirect_to("/game_questions", { :notice => "Game question deleted successfully."} )
   end
+
+  def score
+    render({ :template => "results/index" })
+  end
 end

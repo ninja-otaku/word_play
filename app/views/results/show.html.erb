@@ -1,8 +1,3 @@
-
-
-
-<!-- <%= params.inspect %> -->
-
 <!--
 <div>
   <% matching_records = GameQuestion.where({:game_id => @the_id}) %>
@@ -12,13 +7,17 @@
 </div>
 -->
 
+<% matching_records = GameQuestion.where({ :game_id => @the_id }) %>
+<% total_score = matching_records.sum(:score) %>
+<% records_count = matching_records.count %>
+
 <div>
   Congratulations! Your score is <%= total_score %> out of <%= records_count %>
 </div>
 
 <!-- <%= records_count %> records found -->
 
-<% matching_result = Game.find_by(game_id: @the_id) %>
+<% matching_result = Game.where({ :game_id => @the_id }).first %>
 <% if matching_result.nil? %>
   <% result = Game.new %>
   <% result.game_id = @the_id %>
@@ -26,8 +25,20 @@
   <% result.final_score = total_score %>
   <% result.save %>
 <% end %>
-<div><a href = "/"> Home Page </a></div>
-<div><a href = "/game_questions/<%= Time.now.to_i %><%= rand(10000) %>"> Play Again </a></div>
+
+<% if matching_records.any? %>
+  <% matching_records.each do |record| %>
+    <!-- <p><%= record.id %></p> -->
+    <% question = QuestionBank.where({ :id => record.question_id }).first %>
+    <% if question %> 
+      <p><%= question.base_word %> + <%= question.add_word %> - <%= question.subtract_word %> = <%= question.equals_word %></p>
+    <% end %>
+    <p>Your response was <%= record.user_response %></p>
+  <% end %>
+<% end %>
+
+<div><a href="/">Home Page</a></div>
+<div><a href="/game_questions/<%= Time.now.to_i %><%= rand(10000) %>">Play Again</a></div>
 <!--
 <div>
   <% matching_records = GameQuestion.where({:user_response => "ads"}) %>

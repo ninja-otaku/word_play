@@ -34,7 +34,7 @@
     <% question = QuestionBank.where({ :id => record.question_id }).first %>
     <% if question %> 
       <div class="question-box">
-        <p><strong>Question:</strong> <%= question.base_word %> + <%= question.add_word %> - <%= question.subtract_word %> = <%= question.equals_word %></p>
+        <p><strong>Question:</strong> <%= question.base_word %> - <%= question.subtract_word %> + <%= question.add_word %>  = <%= question.equals_word %></p>
         <p>
           <strong>
             <% if current_user && current_user.id == matching_result.user_id %>

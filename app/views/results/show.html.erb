@@ -1,9 +1,32 @@
-<%= params.inspect %>
-<div>
-<% matching_records = GameQuestion.where({:game_id=>@path_id})%>
-<% total_score = matching_records.sum(:score)%>
-<%= total_score%>
 
+
+
+<%= params.inspect %>
+
+<div>
+  <% matching_records = GameQuestion.where({:game_id => @the_id}) %>
+  <% total_score = matching_records.sum(:score) %>
+  <%= total_score %>
+  <% records_count = matching_records.count %>
 </div>
-<% records_count = matching_records.count %>
+
+<div>
+  Your score is <%= total_score %> out of <%= records_count %>
+</div>
+
 <%= records_count %> records found
+
+<% matching_result = Game.find_by(game_id: @the_id) %>
+<% if matching_result.nil? %>
+  <% result = Game.new %>
+  <% result.game_id = @the_id %>
+  <% result.user_id = current_user.id %>
+  <% result.final_score = total_score %>
+  <% result.save %>
+<% end %>
+
+<div>
+  <% matching_records = GameQuestion.where({:user_response => "ads"}) %>
+  <% records_count = matching_records.count %>
+  <%= records_count %> records found
+</div>

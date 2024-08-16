@@ -72,6 +72,7 @@ class GameQuestionsController < ApplicationController
     #end
     #user=User.where(:id=>matching_records.first.user_id)
     #@user_name=user.player_name
+    @the_id=params.fetch("path_id")
     render({ :template => "results/show" })
   end
 

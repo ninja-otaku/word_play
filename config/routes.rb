@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   get("/game_questions/:path_id", { :controller => "game_questions", :action => "show" })
   
   post("/results_form",{:controller=>"game_questions",:action=>"results"})
-  get("/results",{:controller=>"game_questions",:action=>"results_display"})
+  #get("/results",{:controller=>"game_questions",:action=>"results_display"})
   get("/results/:path_id",{:controller=>"game_questions",:action=>"results_display"})
   
   # UPDATE

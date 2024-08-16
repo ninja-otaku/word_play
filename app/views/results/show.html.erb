@@ -1,1 +1,9 @@
 <%= params.inspect %>
+<div>
+<% matching_records = GameQuestion.where({:game_id=>@path_id})%>
+<% total_score = matching_records.sum(:score)%>
+<%= total_score%>
+
+</div>
+<% records_count = matching_records.count %>
+<%= records_count %> records found

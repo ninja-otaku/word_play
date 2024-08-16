@@ -28,7 +28,7 @@ class GameQuestionsController < ApplicationController
       the_game.question_id=params.fetch("question#{i}_id")
       the_game.correct_response=params.fetch("question#{i}_correct_answer")
       the_game.user_response=params.fetch("answer#{i}")
-
+      the_game.user_id=current_user.id
       # Normalize the answers
       correct_answer_normalized = the_game.correct_response.to_s.strip.downcase.gsub(/[^a-z0-9]/, '')
       user_response_normalized = the_game.user_response.to_s.strip.downcase.gsub(/[^a-z0-9]/, '')
@@ -62,13 +62,13 @@ class GameQuestionsController < ApplicationController
     #x=the_game.id
     #matching_records= GameQuestion.all.where(:id=>x)
     #@total_score = matching_records.sum(:score)
-    #the_game.final_score=total_score
+    #the_game.final_score=@total_score
     #if matching_records.exists?
       # Get the user_id from the first record
-    #  @the_game.user_id = matching_records.first.user_id
+    #  the_game.user_id = matching_records.first.user_id
     #else
       # Handle the case where no records are found
-    #  @the_game.user_id = nil # or some other default value
+    #  the_game.user_id = nil # or some other default value
     #end
     #user=User.where(:id=>matching_records.first.user_id)
     #@user_name=user.player_name

@@ -9,7 +9,7 @@
 #  user_response    :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  game_id          :integer
+#  game_id          :bigint
 #  question_id      :integer
 #  user_id          :integer
 #
